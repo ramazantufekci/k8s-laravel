@@ -36,9 +36,16 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository }}/k8s-laravel
+          images: ghcr.io/${{ github.repository }}/k8s-laravel-php
 
-      # 5) Docker image build ve push
+       # 5) İmaj ismini belirle
+      - name: Nginx Extract metadata for Docker
+        id: meta-nginx
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}/k8s-laravel-nginx
+
+      # 6) Docker image build ve push
       - name: PHP Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
@@ -47,12 +54,12 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      # 6) Docker image build ve push
+      # 7) Docker image build ve push
       - name: Nginx Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
           context: .
           dockerfile: nginx/prod.Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta-nginx.outputs.tags }}
+          labels: ${{ steps.meta-nginx.outputs.labels }}
