@@ -49,6 +49,7 @@ jobs:
       - name: PHP Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
+          contexts: ./php
           file: ./php/prod.Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
@@ -57,6 +58,7 @@ jobs:
       - name: Nginx Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
+          contexts: ./nginx
           file: ./nginx/prod.Dockerfile
           push: true
           tags: ${{ steps.meta-nginx.outputs.tags }}
