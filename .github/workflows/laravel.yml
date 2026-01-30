@@ -39,11 +39,20 @@ jobs:
           images: ghcr.io/${{ github.repository }}/k8s-laravel
 
       # 5) Docker image build ve push
-      - name: Build and Push Docker Image
+      - name: PHP Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
           context: .
-          dockerfile: Dockerfilephp
+          dockerfile: php/prod.Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+      # 6) Docker image build ve push
+      - name: Nginx Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          dockerfile: nginx/prod.Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
