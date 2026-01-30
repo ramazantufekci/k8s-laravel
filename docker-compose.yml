@@ -1,16 +1,17 @@
 services:
   php:
-    build:
-      context: .
-    volumes:
-      - ./:/var/www/html
+    image: ramazanphp
+#    build:
+#      context: .
+#    volumes:
+#      - ./:/var/www/html
 
   web:
-    image: nginx:1.17
-    working_dir: /var/www/html
-    volumes:
-      - ./:/var/www/html
-      - .docker/nginx/nginx_template_local.conf:/etc/nginx/conf.d/default.conf
+    image: ramazannginx
+#    working_dir: /var/www/html
+#    volumes:
+#      - ./:/var/www/html
+#      - .docker/nginx/nginx_template_local.conf:/etc/nginx/conf.d/default.conf
     ports:
       - "81:80"
   node:
