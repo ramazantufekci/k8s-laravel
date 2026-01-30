@@ -1,13 +1,13 @@
 services:
   php:
-    image: ramazanphp
+    image: ghcr.io/ramazantufekci/k8s-laravel/k8s-laravel-php:main
 #    build:
 #      context: .
 #    volumes:
 #      - ./:/var/www/html
 
   web:
-    image: ramazannginx
+    image: ghcr.io/ramazantufekci/k8s-laravel/k8s-laravel-nginx:main
 #    working_dir: /var/www/html
 #    volumes:
 #      - ./:/var/www/html

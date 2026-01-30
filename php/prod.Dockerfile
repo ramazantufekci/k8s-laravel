@@ -6,10 +6,10 @@ RUN mkdir -p /var/www/database/{factories,seeds} \
 && composer install --no-dev --prefer-dist --no-scripts --no-autoloader --no-progress --ignore-platform-reqs
 
 #NPM dependencies
-FROM node:22 AS npm-builder
+FROM node:22 AS npm-build
 WORKDIR /var/www/html
 
-COPY ../package.json ../package-lock.json vite.config.js /var/www/html/
+COPY ../package.json ../package-lock.json ../vite.config.js /var/www/html/
 COPY ../resources /var/www/html/resources/
 COPY ../public /var/www/html/public/
 
@@ -38,5 +38,5 @@ COPY .docker/php/opcache.ini $PHP_INI_DIR/conf.d/
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 COPY --chown=www-data --from=composer-build /var/www/html/vendor/ /var/www/html/vendor/
-COPY --chown=www-data --from=npm-builder /var/www/html/public/ /var/www/html/public/
+COPY --chown=www-data --from=npm-build /var/www/html/public/ /var/www/html/public/
 COPY --chown=www-data . /var/www/html
