@@ -20,15 +20,12 @@ RUN npm run build
 # Actual production image
 
 FROM php:8.5-fpm
-
 WORKDIR /var/www/html
-
-RUN apt update \
-&& apt install --quiet --yes --no-install-recommends \
+RUN apt-get update && apt-get install --quiet --yes --no-install-recommends \
 libzip-dev \
 unzip \
 libpq-dev \
-&& docker-php-ext-install zip pdo pdo_pgsql opcache \
+&& docker-php-ext-install zip pdo pdo_pgsql \
 && pecl install -o -f redis-6.3.0 \
 && docker-php-ext-enable redis
 
