@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Jobs\ExampleJob;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,6 +27,7 @@ class HomeController extends Controller
     }
     public function store()
     {
-        return view('home');
+        ExampleJob::dispatch();
+	return redirect()->back()-with('status','Job was successfully dispatched.');
     }
 }
