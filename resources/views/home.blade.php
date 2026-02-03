@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('You are logged in website!') }}
 		    <form action="{{route("home.store")}}" method="POST">
 			@csrf
 			<button class="btn btn-primary" type="submit">Dispatch the Example</button>
