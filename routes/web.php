@@ -9,4 +9,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::post('/home', 'HomeController@store')->name('home.store');
+Route::post('/home', [HomeController::class, 'store'])->name('home.store');
