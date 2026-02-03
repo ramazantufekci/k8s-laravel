@@ -25,7 +25,8 @@ RUN apt-get update && apt-get install --quiet --yes --no-install-recommends \
 libzip-dev \
 unzip \
 libpq-dev \
-&& docker-php-ext-install zip pdo pdo_pgsql \
+&& docker-php-ext-configure pcntl --enable-pcntl \
+&& docker-php-ext-install zip pdo pdo_pgsql pcntl \
 && pecl install -o -f redis-6.3.0 \
 && docker-php-ext-enable redis
 
@@ -37,7 +38,6 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY --chown=www-data --from=composer-build /var/www/html/vendor/ /var/www/html/vendor/
 COPY --chown=www-data --from=npm-build /var/www/html/public/ /var/www/html/public/
 COPY --chown=www-data . /var/www/html
-RUN ls -al /usr/bin |grep composer && sleep 7
 RUN /usr/bin/composer dump -o \
 && /usr/bin/composer check-platform-reqs \
 && rm -f /usr/bin/composer
