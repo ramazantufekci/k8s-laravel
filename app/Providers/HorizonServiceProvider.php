@@ -31,7 +31,7 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
             return true;
 //return in_array(optional($user)->email, [
                 //
-            ]);
+            //]);
         });
     }
 }
