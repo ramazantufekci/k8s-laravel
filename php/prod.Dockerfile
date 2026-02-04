@@ -43,4 +43,4 @@ RUN /usr/bin/composer dump -o \
 && /usr/bin/composer check-platform-reqs \
 #&& rm -f /usr/bin/composer
 
-ENTRYPOINT ["init-pod.sh"]
+#ENTRYPOINT ["init-pod.sh"]
