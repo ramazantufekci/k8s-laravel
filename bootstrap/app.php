@@ -15,9 +15,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         //
     })
-    ->withSchedule(function (Schedule $schedule){
-        $schedule->job(new ClockJob)->everyMinute();
-    })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();

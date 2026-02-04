@@ -1,0 +1,33 @@
+namespace: kube-laravel
+
+resources:
+  - applications/namespace.yml
+  - applications/redis-01/pvc.yml
+  - applications/redis-01/svc.yml
+  - applications/redis-01/statefulset.yml
+  - applications/redis-01/pv.yml
+    #  - applications/redis-01/configmap.yml
+  - applications/laravel-app/web.yml
+  - applications/laravel-app/svc.yml
+  - applications/laravel-app/worker.yml
+  - applications/laravel-app/scheduler.yml
+  - applications/laravel-app/migrator.yml
+    #  - applications/laravel-app/secret.yml
+  - applications/postgres/pvc.yml
+  - applications/postgres/statefulset.yml
+  - applications/postgres/svc.yml
+  - applications/postgres/pv.yml
+
+images:
+  - name: laravel-app-nginx
+    newName: ghcr.io/ramazantufekci/k8s-laravel/k8s-laravel-nginx
+    newTag: "0.0.13"
+
+  - name: laravel-app-php
+    newName: ghcr.io/ramazantufekci/k8s-laravel/k8s-laravel-php
+    newTag: "0.0.13"
+
+
+secretGenerator:
+  - name: laravelapp-secret
+    env: .env

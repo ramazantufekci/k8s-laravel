@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-01-statefulset
+spec:
+  serviceName: postgres-01-svc
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-01-statefulset
+  template:
+    metadata:
+      name: postgres-01-prod
+      labels:
+        app: postgres-01-statefulset
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:18.1-alpine3.23
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "laravel"
+            - name: POSTGRES_USER
+              value: "laravel"
+            - name: POSTGRES_DB
+              value: "laravel"
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-pv-01-claim
+
+
