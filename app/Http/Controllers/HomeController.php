@@ -28,6 +28,6 @@ class HomeController extends Controller
     public function store()
     {
         ExampleJob::dispatch();
-	return redirect()->back()-with('status','Job was successfully dispatched.');
+	return redirect()->back()->with('status','Job was successfully dispatched.');
     }
 }
