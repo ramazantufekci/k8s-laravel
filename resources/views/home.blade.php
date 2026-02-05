@@ -19,6 +19,9 @@
 			@csrf
 			<button class="btn btn-primary" type="submit">Dispatch the Example</button>
 		    </form>
+			@if (session('success'))
+				<div class="alert">{{session('success')}}</div>
+			@endif
                 </div>
             </div>
         </div>
